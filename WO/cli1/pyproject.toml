@@ -9,3 +9,6 @@ dependencies = [
     "typer[all]>=0.15.1",
     "typing>=3.10.0.0",
 ]
+
+[project.scripts]
+cli1 = "cli1.__main__:app"
