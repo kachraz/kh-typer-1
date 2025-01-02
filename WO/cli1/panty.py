@@ -33,13 +33,19 @@ PASSWORD_TYPE = Annotated[
 def req_cred(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        kwargs["username"] != admin["username"]:
+        if kwargs["username"] != admin["username"]:
             rprint("[bold red]🔴: Invalid Username[/bold red]")
+            exit(1)
+        if kwargs["password"] != admin["password"]:
+            rprint("[bold red]🔴: Invalid Password[/bold red]")
+            exit(1)
+        return func(*args, **kwargs)
 
     return wrapper
 
 
 @app.command()
+@req_cred
 def add_user(
     users: USERLIST_TYPE,
     verbose: VERBOSE_TYPE = False,
@@ -55,7 +61,13 @@ def add_user(
 
 
 @app.command()
-def delete_user(users: USERLIST_TYPE, verbose: VERBOSE_TYPE = False):
+@req_cred
+def delete_user(
+    users: USERLIST_TYPE,
+    verbose: VERBOSE_TYPE = False,
+    username: USERNAME_TYPE = "admin",
+    password: PASSWORD_TYPE = None,
+):
     """Delete Users from the active userdb"""
     label1("Delete Command")
     for user in users:
