@@ -1,22 +1,27 @@
 # CLI App 1 with tpper
+import typer
 from rich import print as rprint
+from rich.traceback import install
+
+install(show_locals=True)
+
+app = typer.Typer()
 
 
-def add_user():
+@app.command()
+def add_user(users: list[str]):
     rprint("Add user")
 
 
+@app.command()
 def delete_user():
     rprint("Delete user")
 
 
-def update_user():
-    rprint("Update user")
-
-
-def main():
-    rprint("Hello from cli1!")
+@app.command()
+def list_users():
+    rprint("List users")
 
 
 if __name__ == "__main__":
-    main()
+    app()
