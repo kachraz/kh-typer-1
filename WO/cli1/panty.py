@@ -25,7 +25,7 @@ def add_user(users: USERLIST_TYPE, verbose: VERBOSE_TYPE = False):
     for user in users:
         if verbose:
             rprint(f"Users {user} added")
-    rprint("🟢: Completed Added Users")
+    rprint("[bold green]🟢: Completed Added Users[/bold green]")
 
 
 @app.command()
@@ -37,7 +37,7 @@ def delete_user(users: USERLIST_TYPE, verbose: VERBOSE_TYPE = False):
             rprint(f"User {user} not found")
         else:
             rprint(f"Users {user} deleted")
-    rprint("🟢: Completed Deleted Users")
+            rprint("🟢❌: Completed Deleted Users")
 
 
 @app.command()
