@@ -10,7 +10,8 @@ app = typer.Typer()
 
 @app.command()
 def add_user(users: list[str]):
-    rprint("Add user")
+    for user in users:
+        rprint(f"Users {user} added")
 
 
 @app.command()
