@@ -3,6 +3,8 @@ import typer
 from typing import Annotated
 from functools import wraps
 from rich import print as rprint
+from rich.progress import track
+from rich.table import Table
 from time import sleep
 
 from rich.traceback import install
@@ -82,10 +84,18 @@ def delete_user(
 
 
 @app.command()
-def list_users():
-    for user in active_users:
+def list_users(verbose: VERBOSE_TYPE = False):
+    table = Table(title="Active Users")
+    table.add_column("UserName", justify="center", style="cyan")
+    table.add_column("Password", justify="center", style="cyan")
+
+    for user in track(active_users, description="Loading Users.."):
         sleep(1)
-        rprint(f"User: {user}")
+        table.add_row(user)
+        if verbose:
+            rprint(f"Users: {user}")
+    rprint("DoneLoading")
+    console.print(table)
 
 
 if __name__ == "__main__":
