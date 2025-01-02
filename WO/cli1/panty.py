@@ -9,11 +9,14 @@ from src.uti import *
 install(show_locals=True)
 
 app = typer.Typer()
-USERLIST_TYPE = Annotated[list[str], typer.Argument(description="List of users to add")]
+
+# For adding more help
+USERLIST_TYPE = Annotated[list[str], typer.Argument(help="List of users to add")]
+VERBOSE_TYPE = Annotated[bool, typer.Option("--verbose", "-v", help="Verbose output")]
 
 
 @app.command()
-def add_user(users: list[str], verbose: bool = False):
+def add_user(users: USERLIST_TYPE, verbose: VERBOSE_TYPE = False):
     """Add Users to the active userdb"""
     label1("Add Command")
     for user in users:
