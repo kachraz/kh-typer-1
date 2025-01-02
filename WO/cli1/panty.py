@@ -16,10 +16,17 @@ active_users = ["Jan", "Joe", "Jill", "Jack", "Jill"]
 # For adding more help
 USERLIST_TYPE = Annotated[list[str], typer.Argument(help="List of users to add")]
 VERBOSE_TYPE = Annotated[bool, typer.Option("--verbose", "-v", help="Verbose output")]
+USERNAME_TYPE = Annotated[str, typer.Option(help="Username ? ")]
+PASSWORD_TYPE = Annotated[str, typer.Option(help="Password ? ")]
 
 
 @app.command()
-def add_user(users: USERLIST_TYPE, verbose: VERBOSE_TYPE = False):
+def add_user(
+    users: USERLIST_TYPE,
+    verbose: VERBOSE_TYPE = False,
+    username: USERNAME_TYPE = "admin",
+    password: PASSWORD_TYPE = None,
+):
     """Add Users to the active userdb"""
     label1("Add Command")
     for user in users:
