@@ -3,6 +3,8 @@ import typer
 from typing import Annotated
 from functools import wraps
 from rich import print as rprint
+from time import sleep
+
 from rich.traceback import install
 
 from src.uti import *
@@ -23,9 +25,10 @@ active_users = ["Jan", "Joe", "Jill", "Jack", "Jill"]
 # For adding more help
 USERLIST_TYPE = Annotated[list[str], typer.Argument(help="List of users to add")]
 VERBOSE_TYPE = Annotated[bool, typer.Option("--verbose", "-v", help="Verbose output")]
-USERNAME_TYPE = Annotated[str, typer.Option(help="Username ? ")]
+USERNAME_TYPE = Annotated[str, typer.Option(help="Username ?", envvar="USERNAME")]
 PASSWORD_TYPE = Annotated[
-    str, typer.Option(help="Password ? ", prompt=True, hide_input=True)
+    str,
+    typer.Option(help="Password ? ", prompt=True, hide_input=True, envvar="PASSWORD"),
 ]
 
 
@@ -80,7 +83,9 @@ def delete_user(
 
 @app.command()
 def list_users():
-    rprint("List users")
+    for user in active_users:
+        sleep(1)
+        rprint(f"User: {user}")
 
 
 if __name__ == "__main__":
