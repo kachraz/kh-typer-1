@@ -1,6 +1,7 @@
 # CLI App 1 with tpper
 import typer
 from typing import Annotated
+from functools import wraps
 from rich import print as rprint
 from rich.traceback import install
 
@@ -26,6 +27,16 @@ USERNAME_TYPE = Annotated[str, typer.Option(help="Username ? ")]
 PASSWORD_TYPE = Annotated[
     str, typer.Option(help="Password ? ", prompt=True, hide_input=True)
 ]
+
+
+# Deccorator function for validation
+def req_cred(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        kwargs["username"] != admin["username"]:
+            rprint("[bold red]🔴: Invalid Username[/bold red]")
+
+    return wrapper
 
 
 @app.command()
