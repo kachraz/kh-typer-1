@@ -10,10 +10,10 @@ console = Console()
 
 
 def label1(label):
-    panel = Panel(
-        f"""{label}""",
-        title="Mistress",
-        subtitle="ToiletSlave",
+    panel = Panel.fit(
+        f"""[green_yellow]{label}[/green_yellow]""",
+        title="(:",
+        subtitle=":)",
         style="Italic",
         border_style="magenta",
     )

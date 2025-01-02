@@ -3,15 +3,21 @@ import typer
 from rich import print as rprint
 from rich.traceback import install
 
+from src.uti import *
+
 install(show_locals=True)
 
 app = typer.Typer()
 
 
 @app.command()
-def add_user(users: list[str]):
+def add_user(users: list[str], verbose: bool = True):
+    """Add Users to the active userdb"""
+    label1("Add Command")
     for user in users:
-        rprint(f"Users {user} added")
+        if verbose:
+            rprint(f"Users {user} added")
+        rprint("🟢: Completed Added Users")
 
 
 @app.command()
