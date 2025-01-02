@@ -10,6 +10,12 @@ install(show_locals=True)
 
 app = typer.Typer()
 
+# Fake Account for authentication
+admin = {
+    "username": "admin",
+    "password": "admin",
+}
+
 # Fake Active DB
 active_users = ["Jan", "Joe", "Jill", "Jack", "Jill"]
 
@@ -17,7 +23,9 @@ active_users = ["Jan", "Joe", "Jill", "Jack", "Jill"]
 USERLIST_TYPE = Annotated[list[str], typer.Argument(help="List of users to add")]
 VERBOSE_TYPE = Annotated[bool, typer.Option("--verbose", "-v", help="Verbose output")]
 USERNAME_TYPE = Annotated[str, typer.Option(help="Username ? ")]
-PASSWORD_TYPE = Annotated[str, typer.Option(help="Password ? ")]
+PASSWORD_TYPE = Annotated[
+    str, typer.Option(help="Password ? ", prompt=True, hide_input=True)
+]
 
 
 @app.command()
