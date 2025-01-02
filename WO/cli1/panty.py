@@ -87,7 +87,6 @@ def delete_user(
 def list_users(verbose: VERBOSE_TYPE = False):
     table = Table(title="Active Users")
     table.add_column("UserName", justify="center", style="cyan")
-    table.add_column("Password", justify="center", style="cyan")
 
     for user in track(active_users, description="Loading Users.."):
         sleep(1)
